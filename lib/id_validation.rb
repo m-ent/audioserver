@@ -1,5 +1,5 @@
 # ID validation for Nagoya Municipal East Medical Center, Higashi Municipal Hosptial
-# MAMIYA, Schinichiro / Department of Otolaryngology
+# MAMIYA, Shinichiro / Department of Otolaryngology
 
 def valid_id?(id_str)
   id  = id_str.delete("^0-9") # remove non-number
