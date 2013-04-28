@@ -189,9 +189,17 @@ describe PatientsController do
     end
 
     it "invalidな hp_idで requestした場合、HTTP status code 400を返すこと" do
+      pending "hp_idのvalidationを当面使用しないため"
       @invalid_hp_id = 18
       get :by_hp_id, {:hp_id => @invalid_hp_id}, valid_session
       response.status.should  be(400)
+    end
+
+    it "(以前のsystemでは)invalidな hp_idで requestした場合も、HTTP status code 400を返さないこと" do
+      # hp_idのvalidationを当面使用しないため，上のexampleをpendingにして，代わりにこれを置く
+      @invalid_hp_id = 18
+      get :by_hp_id, {:hp_id => @invalid_hp_id}, valid_session
+      response.status.should_not be(400)
     end
   end
 end

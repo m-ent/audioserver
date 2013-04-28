@@ -11,10 +11,16 @@ describe Patient do
 
   context "hp_id が invalid の場合" do
     it "保存できないこと" do
+      pending "hp_idのvalidationを当面使わないため"
       patient = FactoryGirl.build(:patient, :hp_id => '123')
-                                            # hp_id: 123(invalid)
+                                            # hp_id: 123 (invalid)
       patient.save.should_not be_true
     end
-  end
 
+    it "保存できること" do
+      patient = FactoryGirl.build(:patient, :hp_id => '123')
+                                 # hp_id: 123 (以前のsystemではinvalid)
+      patient.save.should be_true
+    end
+  end
 end
