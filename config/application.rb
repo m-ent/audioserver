@@ -21,6 +21,9 @@ module Audioserver
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # hp_id の validation を行うか否か
+    config.id_validation = false
+
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 

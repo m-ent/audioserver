@@ -253,15 +253,26 @@ describe Exam_window do
     context "invalid IDの場合" do
       before do
         @ew.id_entry.text = @invalid_hp_id
+        @ew.test_data = Raw_audiosample
         @ew.button_id_entry.signal_emit("clicked")
       end
 
-      it "invalid_idのメッセージを表示すること" do
-        @ew.state.should == "invalid_id"
-      end
+      if id_validation_enable?
+        it "invalid_idのメッセージを表示すること" do
+          @ew.state.should == "invalid_id"
+        end
 
-      it "AudioExamのインスタンスが生成されないこと" do
-        @ew.exam.should be_nil
+        it "AudioExamのインスタンスが生成されないこと" do
+          @ew.exam.should be_nil
+        end
+      else
+        it "invalid_idのメッセージを表示しないこと" do
+          @ew.state.should_not == "invalid_id"
+        end
+
+        it "AudioExamのインスタンスが生成されること" do
+          @ew.exam.should_not be_nil
+        end
       end
     end
 

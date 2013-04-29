@@ -346,20 +346,20 @@ describe AudiogramsController do
         # 作成したAudiogramを示すことが必要
       end
 
-      it "不正なhp_idの場合、HTTP status code 400を返すこと" do
-        pending "hp_idのvalidationを当面使用しないため"
-        post :direct_create, {:hp_id => @invalid_hp_id, :examdate => @examdate, \
-                              :audiometer => @audiometer, :datatype => @datatype, \
-                              :comment => @comment, :data => @raw_audiosample}
-        response.status.should  be(400)
-      end
-
-      it "(以前のsystremでは)不正なhp_idの場合も、HTTP status code 204を返すこと" do
-        # hp_idのvalidationを当面使用しないため
-        post :direct_create, {:hp_id => @invalid_hp_id, :examdate => @examdate, \
-                              :audiometer => @audiometer, :datatype => @datatype, \
-                              :comment => @comment, :data => @raw_audiosample}
-        response.status.should  be(204)
+      if id_validation_enable?
+        it "(以前のsystremでは)不正なhp_idの場合、HTTP status code 400を返すこと" do
+          post :direct_create, {:hp_id => @invalid_hp_id, :examdate => @examdate, \
+                                :audiometer => @audiometer, :datatype => @datatype, \
+                                :comment => @comment, :data => @raw_audiosample}
+          response.status.should  be(400)
+        end
+      else
+        it "(以前のsystremでは)不正なhp_idの場合も、HTTP status code 204を返すこと" do
+          post :direct_create, {:hp_id => @invalid_hp_id, :examdate => @examdate, \
+                                :audiometer => @audiometer, :datatype => @datatype, \
+                                :comment => @comment, :data => @raw_audiosample}
+          response.status.should  be(204)
+        end
       end
 
       it "audiometerの入力がない場合、HTTP status code 400を返すこと" do
