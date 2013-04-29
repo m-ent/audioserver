@@ -60,11 +60,8 @@ describe AudiogramsController do
       image_root = "app/assets/images"
       image_dir = "#{Rails.root}/#{image_root}/#{Rails.env}/graphs/#{exam_year}" 
       @image_file = "#{Rails.root}/#{image_root}/#{@audiogram.image_location}"
-      Dir::mkdir("#{Rails.root}/#{image_root}/#{Rails.env}")\
-        if not File.exists?("#{Rails.root}/#{image_root}/#{Rails.env}") 
-      Dir::mkdir("#{Rails.root}/#{image_root}/#{Rails.env}/graphs")\
-        if not File.exists?("#{Rails.root}/#{image_root}/#{Rails.env}/graphs") 
-      Dir::mkdir(image_dir) if not File.exists?(image_dir)
+      FileUtils.makedirs(image_dir) if not File.exists?(image_dir)
+
       File::delete(@image_file) if File.exist?(@image_file)
       File::open(@image_file, "w") do |f|
         f.write (@test_str = "test_string")
