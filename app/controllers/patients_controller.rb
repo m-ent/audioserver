@@ -45,6 +45,7 @@ class PatientsController < ApplicationController
   # POST /patients.json
   def create
     @patient = Patient.new(params[:patient])
+    @patient.hp_id = valid_id?(@patient.hp_id)
 
     respond_to do |format|
       if @patient.save
