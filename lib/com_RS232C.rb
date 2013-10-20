@@ -7,9 +7,15 @@ require 'thread'
 
 class Rs232c
   def initialize
+    os = `uname`
+    if /FreeBSD/ =~ os
+      port_base = "/dev/cuaU"
+    elsif /Linux/ =~ os
+      port_base = "/dev/ttyUSB" 
+    end
     @q = Queue.new
-    @port0 = "/dev/cuaU0"
-    @port1 = "/dev/cuaU1"
+    @port0 = "#{port_base}0" # FreeBSD: /dev/cuaU0, Linux: /dev/ttyUSB0
+    @port1 = "#{port_base}1"
     @baud_rate = 9600
     @data_bits = 7
     @stop_bits = 1
@@ -78,7 +84,7 @@ class Rs232c
       begin
         timeout(@timelimit_for_receiving) do
           result << find_flag_raiser
-	end
+        end
       rescue Timeout::Error
         return result                        # 時間切れなら結果を返す
         break
