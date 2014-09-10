@@ -21,6 +21,7 @@ def id_validation_enable?
 end
 
 def valid_id?(id_str)
+  return false if !id_str
   id  = id_str.delete("^0-9") # remove non-number
   if id == ""
     return false
