@@ -28,4 +28,7 @@
 /lib/result_r.png
 /lib/dump.png
 
+# Ignore local gems
+/vendor/bundle
+
 /SMam-audioserver*
