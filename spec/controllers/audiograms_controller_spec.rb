@@ -88,7 +88,7 @@ describe AudiogramsController do
       @audiogram.save
       @audiogram.image_location.should == "DummyImageLocation"
       get :show, {:patient_id => @patient.to_param, :id => @audiogram.to_param}, valid_session
-      File.exist?(@image_file).should be_true
+      File.exist?(@image_file).should be true
       @audiogram.reload
       @audiogram.image_location.should_not == "DummyImageLocation"
     end
@@ -340,8 +340,8 @@ describe AudiogramsController do
                               :comment => @comment, :data => @raw_audiosample}
         img_loc = "app/assets/images/#{assigns(:audiogram).image_location}"
         thumb_loc = img_loc.sub("graphs", "thumbnails")
-        File::exists?(img_loc).should be_true
-        File::exists?(thumb_loc).should be_true
+        File::exists?(img_loc).should be true
+        File::exists?(thumb_loc).should be true
         # assigns(:audiogram)を有効にするには、controller側でインスタンス変数@audiogramが
         # 作成したAudiogramを示すことが必要
       end
@@ -442,7 +442,7 @@ describe AudiogramsController do
       end
 
       it "examdateが設定されていない場合..." do
-        pending "どうしたものかまだ思案中"
+        skip "どうしたものかまだ思案中"
       end
 
     end

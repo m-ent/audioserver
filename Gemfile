@@ -39,6 +39,7 @@ gem 'jquery-rails'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.99"
+  gem "rspec-activemodel-mocks"
 end
 
 gem "thin"
