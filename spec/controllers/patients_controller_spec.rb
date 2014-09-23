@@ -90,14 +90,14 @@ describe PatientsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved patient as @patient" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Patient.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Patient).to receive(:save).and_return(false)
         post :create, {:patient => {}}, valid_session
         assigns(:patient).should be_a_new(Patient)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Patient.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Patient).to receive(:save).and_return(false)
         post :create, {:patient => {}}, valid_session
         response.should render_template("new")
       end
@@ -112,7 +112,7 @@ describe PatientsController do
         # specifies that the Patient created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Patient.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Patient).to receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => patient.to_param, :patient => {'these' => 'params'}}, valid_session
       end
 
@@ -133,7 +133,7 @@ describe PatientsController do
       it "assigns the patient as @patient" do
         patient = Patient.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Patient.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Patient).to receive(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {}}, valid_session
         assigns(:patient).should eq(patient)
       end
@@ -141,7 +141,7 @@ describe PatientsController do
       it "re-renders the 'edit' template" do
         patient = Patient.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Patient.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Patient).to receive(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {}}, valid_session
         response.should render_template("edit")
       end

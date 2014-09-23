@@ -88,14 +88,14 @@ describe ExaminersController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved examiner as @examiner" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Examiner.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         post :create, {:examiner => {}}, valid_session
         assigns(:examiner).should be_a_new(Examiner)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Examiner.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         post :create, {:examiner => {}}, valid_session
         response.should render_template("new")
       end
@@ -110,7 +110,7 @@ describe ExaminersController do
         # specifies that the Examiner created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Examiner.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Examiner).to receive(:update_attributes).with({'these' => 'params'})
         put :update, {:id => examiner.to_param, :examiner => {'these' => 'params'}}, valid_session
       end
 
@@ -131,7 +131,7 @@ describe ExaminersController do
       it "assigns the examiner as @examiner" do
         examiner = Examiner.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Examiner.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         put :update, {:id => examiner.to_param, :examiner => {}}, valid_session
         assigns(:examiner).should eq(examiner)
       end
@@ -139,7 +139,7 @@ describe ExaminersController do
       it "re-renders the 'edit' template" do
         examiner = Examiner.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Examiner.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         put :update, {:id => examiner.to_param, :examiner => {}}, valid_session
         response.should render_template("edit")
       end

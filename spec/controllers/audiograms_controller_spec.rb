@@ -155,14 +155,14 @@ describe AudiogramsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved audiogram as @audiogram" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Audiogram.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         post :create, {:patient_id => @patient.to_param, :audiogram => {}}, valid_session
         assigns(:audiogram).should be_a_new(Audiogram)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Audiogram.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         post :create, {:patient_id => @patient.to_param, :audiogram => {}}, valid_session
         response.should render_template("new")
       end
@@ -178,7 +178,7 @@ describe AudiogramsController do
         # specifies that the Audiogram created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Audiogram.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Audiogram).to receive(:update_attributes).with({'these' => 'params'})
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => {'these' => 'params'}}, valid_session
       end
@@ -205,7 +205,7 @@ describe AudiogramsController do
         audiogram = Audiogram.create! valid_attributes
         @patient.audiograms << audiogram
         # Trigger the behavior that occurs when invalid params are submitted
-        Audiogram.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => {}}, valid_session
         assigns(:audiogram).should eq(audiogram)
@@ -215,7 +215,7 @@ describe AudiogramsController do
         audiogram = Audiogram.create! valid_attributes
         @patient.audiograms << audiogram
         # Trigger the behavior that occurs when invalid params are submitted
-        Audiogram.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => {}}, valid_session
         response.should render_template("edit")
