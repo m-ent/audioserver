@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'spec_helper'
+require 'rails_helper'
 
 describe Patient do
   context "hp_id が valid の場合" do

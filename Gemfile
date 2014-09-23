@@ -38,7 +38,7 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.99"
+  gem "rspec-rails", "~>3.0"
   gem "rspec-activemodel-mocks"
 end
 

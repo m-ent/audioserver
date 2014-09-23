@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "audiograms/edit" do
   before(:each) do
     @patient = FactoryGirl.create(:patient)
     @audiogram = assign(:audiogram, stub_model(Audiogram,
-      :patient => nil,
+      :patient => @patient,
       :examiner => nil,
       :comment => "MyString",
       :image_location => "MyString",
@@ -120,7 +120,6 @@ describe "audiograms/edit" do
 
   it "renders the edit audiogram form" do
     render
-
     # Run the generator again with the --webrat flag if you want to use webrat matchers
 #    #assert_select "form", :action => audiograms_path(@audiogram), :method => "post" do
     assert_select "form", :action => patient_audiograms_path([@patient, @audiogram]), :method => "post" do
