@@ -32,7 +32,7 @@
 <tr><th>mode</th> <th>side</th> <th>125Hz</th> <th>250Hz</th> <th>500Hz</th> 
                                  <th>1kHz</th> <th>2kHz</th> <th>4kHz</th> <th>8kHz</th>
     <td rowspan="5">
-      <%= form_tag({:controller => "audiograms", :action => "edit_comment"}, {:method => :put}) do %>
+      <%= form_tag(edit_comment_patient_audiogram_path(@patient,@audiogram), {:method => :put}) do %>
         <div class="field">
           <%= text_field_tag "comment", @audiogram.comment %>
         </div>

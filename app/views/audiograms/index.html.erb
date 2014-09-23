@@ -18,12 +18,12 @@
     <td><%#= check_box_tag "selected[]", audiogram.id %><br><a href="#search" %>▼</a></td>
     <td><%= audiogram.examdate.strftime("%Y/%m/%d") %><br><%= audiogram.examdate.strftime("%X") %></td>
     <td><%= link_to(image_tag(audiogram.image_location.sub("graphs", "thumbnails")),\
-      :action => "show", :id => audiogram.id )%></td>
+       patient_audiogram_path(@patient, audiogram) )%></td>
     <td>R: <%= mean("4R", audiogram)[:R] %><br>L: <%= mean("4R", audiogram)[:L] %></td>
       <!-- helper method is put at app/helpers/audiograms_helper.rb -->
     <td><%= audiogram.comment %></td>
     <!-- td><%#= audiogram.manual_input %></td -->
-    <td><%= link_to 'Show', :action => "show", :id => audiogram.id %><br>
+    <td><%= link_to 'Show', patient_audiogram_path(@patient, audiogram) %><br>
         <%= link_to 'Edit', edit_patient_audiogram_path(@patient, audiogram) %><br>
         <%= link_to 'Destroy', [audiogram.patient, audiogram], :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
