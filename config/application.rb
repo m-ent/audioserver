@@ -67,8 +67,6 @@ module Audioserver
     config.assets.version = '1.0'
 
     # I18n locale validation
-    config.i18n.enforce_available_locales = false
-
-
+    config.i18n.enforce_available_locales = true
   end
 end
