@@ -48,10 +48,11 @@ describe "patients/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                       # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should match(/No Audiogram/)
-      rendered.should_not match(/Audiograms/)
+      expect(rendered).to match(/No Audiogram/)
+      expect(rendered).not_to match(/Audiograms/)
+
     end
   end
 
@@ -67,10 +68,10 @@ describe "patients/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                       # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should_not match(/No Otolaryngological data/)
-      rendered.should match(Regexp.new("Audiograms.+(3.+exams)"))
+      expect(rendered).not_to match(/No Otolaryngological data/)
+      expect(rendered).to match(Regexp.new("Audiograms.+(3.+exams)"))
       # @patientのaudiogramのindexへのlinkが表示されること
       assert_select "h2>a", :href => Regexp.new("patients/#{@patient.to_param}/audiograms")
       # 3回分のAudiogramを表示
@@ -80,7 +81,7 @@ describe "patients/show" do
         :count => 3
       assert_select "tr>td>a>img", :count => 3
       thumb_location = "assets/#{@audiogram_stub0.image_location.sub("graphs", "thumbnails")}"
-      rendered.should =~ Regexp.new("#{thumb_location}.+#{thumb_location}", Regexp::MULTILINE)
+      expect(rendered).to match(Regexp.new("#{thumb_location}.+#{thumb_location}", Regexp::MULTILINE))
       # 最新のAudiogramが最初に表示されること
       assert_select "tr>td#recent0", :text =>\
         Regexp.new("#{(@examdate+3600*24).strftime("%Y/%m/%d")}"), :count => 1
@@ -103,9 +104,9 @@ describe "patients/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should_not match(/No Otolaryngological data/)
-      rendered.should match(Regexp.new("Audiogram.+(1.+exam)"))
-      rendered.should_not match(Regexp.new("Audiograms.+(1.+exams)"))
+      expect(rendered).not_to match(/No Otolaryngological data/)
+      expect(rendered).to match(Regexp.new("Audiogram.+(1.+exam)"))
+      expect(rendered).not_to match(Regexp.new("Audiograms.+(1.+exams)"))
       # 1回分のAudiogramを表示
       assert_select "tr>td", :text => Regexp.new("R:.+#{mean("4R", @audiogram_stub0)[:R]}"),\
         :count => 1
@@ -125,7 +126,7 @@ describe "patients/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new("Audiograms.+(10.+exams)"))
+      expect(rendered).to match(Regexp.new("Audiograms.+(10.+exams)"))
       # 1+4回分のAudiogramを表示(残りは表示されないこと)
       assert_select "tr>td", :text =>\
         Regexp.new("#{(@examdate+3600*24).strftime("%Y/%m/%d")}"), :count => 1   # stub1

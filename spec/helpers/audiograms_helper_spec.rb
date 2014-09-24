@@ -14,11 +14,11 @@ require 'rails_helper'
 describe AudiogramsHelper do
   describe "reg_id" do
     it "xxxx-xxx-xx-xの形式に変換されること" do
-      reg_id("19").should == "000-0000-01-9"
+      expect(reg_id("19")).to eq "000-0000-01-9"
     end
 
     it "10桁を越える入力の場合、11桁目以降は捨てること" do
-      reg_id("1234567890123").should == "123-4567-89-0"
+      expect(reg_id("1234567890123")).to eq "123-4567-89-0"
     end
   end
 
@@ -41,19 +41,19 @@ describe AudiogramsHelper do
       it "3分法が正しく求められること" do
         r3 = (@a[0] + @a[1] + @a[2]) / 3
         l3 = (@a[4] + @a[5] + @a[6]) / 3
-        mean("3",@audiogram).should == set_data_with_round(r3, l3)
+        expect(mean("3", @audiogram)).to eq set_data_with_round(r3, l3)
       end
 
       it "4分法が正しく求められること" do
         r4 = (@a[0] + @a[1] *2 + @a[2]) / 4
         l4 = (@a[4] + @a[5] *2 + @a[6]) / 4
-        mean("4",@audiogram).should == set_data_with_round(r4, l4)
+        expect(mean("4", @audiogram)).to eq set_data_with_round(r4, l4)
       end
 
       it "6分法が正しく求められること" do
         r6 = (@a[0] + @a[1] *2 + @a[2] *2 + @a[3]) / 6
         l6 = (@a[4] + @a[5] *2 + @a[6] *2 + @a[7]) / 6
-        mean("6",@audiogram).should == set_data_with_round(r6, l6)
+        expect(mean("6", @audiogram)).to eq set_data_with_round(r6, l6)
       end
 
       it "正規化4分法が正しく求められること(100dBを超えるデータの取扱い)" do
@@ -63,7 +63,7 @@ describe AudiogramsHelper do
         @a[6] = 105.0     # cut off された数値
         r4r = (@a[0] + @a[1] *2 + @a[2]) / 4
         l4r = (@a[4] + @a[5] *2 + @a[6]) / 4
-        mean("4R",@audiogram).should == set_data_with_round(r4r, l4r)
+        expect(mean("4R", @audiogram)).to eq set_data_with_round(r4r, l4r)
       end
     end
 
@@ -76,19 +76,19 @@ describe AudiogramsHelper do
       end
     
       it "3分法の結果として -- を返すこと" do
-        mean("3",@audiogram).should == {:R => "--", :L => "--"}
+        expect(mean("3", @audiogram)).to eq ({:R => "--", :L => "--"})
       end
 
       it "4分法の結果として -- を返すこと" do
-        mean("4",@audiogram).should == {:R => "--", :L => "--"}
+        expect(mean("4", @audiogram)).to eq ({:R => "--", :L => "--"})
       end
 
       it "6分法の結果として -- を返すこと" do
-        mean("6",@audiogram).should == {:R => "--", :L => "--"}
+        expect(mean("6", @audiogram)).to eq ({:R => "--", :L => "--"})
       end
 
       it "正規化4分法の結果として -- を返すこと" do
-        mean("4R",@audiogram).should == {:R => "--", :L => "--"}
+        expect(mean("4R", @audiogram)).to eq ({:R => "--", :L => "--"})
       end
     end
   end

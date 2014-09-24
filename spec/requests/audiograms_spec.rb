@@ -6,7 +6,7 @@ describe "Audiograms" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       @patient = FactoryGirl.create(:patient)
       get patient_audiograms_path(@patient)
-      response.status.should be(200)
+      expect(response.status).to be(200)
     end
   end
 end

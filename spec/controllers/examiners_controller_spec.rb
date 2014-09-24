@@ -38,7 +38,7 @@ describe ExaminersController do
     it "assigns all examiners as @examiners" do
       examiner = Examiner.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:examiners).should eq([examiner])
+      expect(assigns(:examiners)).to eq([examiner])
     end
   end
 
@@ -46,14 +46,14 @@ describe ExaminersController do
     it "assigns the requested examiner as @examiner" do
       examiner = Examiner.create! valid_attributes
       get :show, {:id => examiner.to_param}, valid_session
-      assigns(:examiner).should eq(examiner)
+      expect(assigns(:examiner)).to eq(examiner)
     end
   end
 
   describe "GET new" do
     it "assigns a new examiner as @examiner" do
       get :new, {}, valid_session
-      assigns(:examiner).should be_a_new(Examiner)
+      expect(assigns(:examiner)).to be_a_new(Examiner)
     end
   end
 
@@ -61,7 +61,7 @@ describe ExaminersController do
     it "assigns the requested examiner as @examiner" do
       examiner = Examiner.create! valid_attributes
       get :edit, {:id => examiner.to_param}, valid_session
-      assigns(:examiner).should eq(examiner)
+      expect(assigns(:examiner)).to eq(examiner)
     end
   end
 
@@ -75,13 +75,13 @@ describe ExaminersController do
 
       it "assigns a newly created examiner as @examiner" do
         post :create, {:examiner => valid_attributes}, valid_session
-        assigns(:examiner).should be_a(Examiner)
-        assigns(:examiner).should be_persisted
+        expect(assigns(:examiner)).to be_a(Examiner)
+        expect(assigns(:examiner)).to be_persisted
       end
 
       it "redirects to the created examiner" do
         post :create, {:examiner => valid_attributes}, valid_session
-        response.should redirect_to(Examiner.last)
+        expect(response).to redirect_to(Examiner.last)
       end
     end
 
@@ -90,14 +90,14 @@ describe ExaminersController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         post :create, {:examiner => {}}, valid_session
-        assigns(:examiner).should be_a_new(Examiner)
+        expect(assigns(:examiner)).to be_a_new(Examiner)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         post :create, {:examiner => {}}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -117,13 +117,13 @@ describe ExaminersController do
       it "assigns the requested examiner as @examiner" do
         examiner = Examiner.create! valid_attributes
         put :update, {:id => examiner.to_param, :examiner => valid_attributes}, valid_session
-        assigns(:examiner).should eq(examiner)
+        expect(assigns(:examiner)).to eq(examiner)
       end
 
       it "redirects to the examiner" do
         examiner = Examiner.create! valid_attributes
         put :update, {:id => examiner.to_param, :examiner => valid_attributes}, valid_session
-        response.should redirect_to(examiner)
+        expect(response).to redirect_to(examiner)
       end
     end
 
@@ -133,7 +133,7 @@ describe ExaminersController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         put :update, {:id => examiner.to_param, :examiner => {}}, valid_session
-        assigns(:examiner).should eq(examiner)
+        expect(assigns(:examiner)).to eq(examiner)
       end
 
       it "re-renders the 'edit' template" do
@@ -141,7 +141,7 @@ describe ExaminersController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Examiner).to receive(:save).and_return(false)
         put :update, {:id => examiner.to_param, :examiner => {}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -157,7 +157,7 @@ describe ExaminersController do
     it "redirects to the examiners list" do
       examiner = Examiner.create! valid_attributes
       delete :destroy, {:id => examiner.to_param}, valid_session
-      response.should redirect_to(examiners_url)
+      expect(response).to redirect_to(examiners_url)
     end
   end
 

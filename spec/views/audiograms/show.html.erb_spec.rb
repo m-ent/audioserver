@@ -65,46 +65,46 @@ describe "audiograms/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should match(/\+0900/)             # 検査時刻がJSTで表示されること
-      rendered.should =~ Regexp.new("assets/#{@audiogram.image_location}")
-      rendered.should match(/Comment/)
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:L].to_s))
-      rendered.should_not match(/cut off/)        # cut off値表示がない
-      rendered.should match(/1/)                  # マスキングの条件が表示される
-      rendered.should match(/11/)
-      rendered.should match(/21/)
-      rendered.should match(/31/)
-      rendered.should match(/41/)
-      rendered.should match(/51/)
-      rendered.should match(/61/)
-      rendered.should match(/2/)
-      rendered.should match(/12/)
-      rendered.should match(/22/)
-      rendered.should match(/32/)
-      rendered.should match(/42/)
-      rendered.should match(/52/)
-      rendered.should match(/62/)
-      rendered.should match(/3/)
-      rendered.should match(/13/)
-      rendered.should match(/23/)
-      rendered.should match(/33/)
-      rendered.should match(/43/)
-      rendered.should match(/53/)
-      rendered.should match(/4/)
-      rendered.should match(/14/)
-      rendered.should match(/24/)
-      rendered.should match(/34/)
-      rendered.should match(/44/)
-      rendered.should match(/54/)
-      rendered.should match(/Audiometer/)
-      rendered.should match(/Hospital/)
+      expect(rendered).to match(/\+0900/)             # 検査時刻がJSTで表示されること
+      expect(rendered).to match(Regexp.new("assets/#{@audiogram.image_location}"))
+      expect(rendered).to match(/Comment/)
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:L].to_s))
+      expect(rendered).to_not match(/cut off/)        # cut off値表示がない
+      expect(rendered).to match(/1/)                  # マスキングの条件が表示される
+      expect(rendered).to match(/11/)
+      expect(rendered).to match(/21/)
+      expect(rendered).to match(/31/)
+      expect(rendered).to match(/41/)
+      expect(rendered).to match(/51/)
+      expect(rendered).to match(/61/)
+      expect(rendered).to match(/2/)
+      expect(rendered).to match(/12/)
+      expect(rendered).to match(/22/)
+      expect(rendered).to match(/32/)
+      expect(rendered).to match(/42/)
+      expect(rendered).to match(/52/)
+      expect(rendered).to match(/62/)
+      expect(rendered).to match(/3/)
+      expect(rendered).to match(/13/)
+      expect(rendered).to match(/23/)
+      expect(rendered).to match(/33/)
+      expect(rendered).to match(/43/)
+      expect(rendered).to match(/53/)
+      expect(rendered).to match(/4/)
+      expect(rendered).to match(/14/)
+      expect(rendered).to match(/24/)
+      expect(rendered).to match(/34/)
+      expect(rendered).to match(/44/)
+      expect(rendered).to match(/54/)
+      expect(rendered).to match(/Audiometer/)
+      expect(rendered).to match(/Hospital/)
     end
   end
 
@@ -117,47 +117,47 @@ describe "audiograms/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should match(/\+0900/)             # 検査時刻がJSTで表示されること
-      rendered.should match(/Comment/)
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:L].to_s))
-      rendered.should match(/cut off/)            # cut off値表示がある
-      rendered.should match(/1/)                  # マスキングの条件が表示される
-      rendered.should match(/11/)
-      rendered.should match(/21/)
-      rendered.should match(/31/)
-      rendered.should match(/41/)
-      rendered.should match(/51/)
-      rendered.should match(/61/)
-      rendered.should match(/2/)
-      rendered.should match(/12/)
-      rendered.should match(/22/)
-      rendered.should match(/32/)
-      rendered.should match(/42/)
-      rendered.should match(/52/)
-      rendered.should match(/62/)
-      rendered.should match(/3/)
-      rendered.should match(/13/)
-      rendered.should match(/23/)
-      rendered.should match(/33/)
-      rendered.should match(/43/)
-      rendered.should match(/53/)
-      rendered.should match(/4/)
-      rendered.should match(/14/)
-      rendered.should match(/24/)
-      rendered.should match(/34/)
-      rendered.should match(/44/)
-      rendered.should match(/54/)
-      rendered.should match(/Audiometer/)
-      rendered.should match(/Hospital/)
+      expect(rendered).to match(/\+0900/)             # 検査時刻がJSTで表示されること
+      expect(rendered).to match(/Comment/)
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:L].to_s))
+      expect(rendered).to match(/cut off/)            # cut off値表示がある
+      expect(rendered).to match(/1/)                  # マスキングの条件が表示される
+      expect(rendered).to match(/11/)
+      expect(rendered).to match(/21/)
+      expect(rendered).to match(/31/)
+      expect(rendered).to match(/41/)
+      expect(rendered).to match(/51/)
+      expect(rendered).to match(/61/)
+      expect(rendered).to match(/2/)
+      expect(rendered).to match(/12/)
+      expect(rendered).to match(/22/)
+      expect(rendered).to match(/32/)
+      expect(rendered).to match(/42/)
+      expect(rendered).to match(/52/)
+      expect(rendered).to match(/62/)
+      expect(rendered).to match(/3/)
+      expect(rendered).to match(/13/)
+      expect(rendered).to match(/23/)
+      expect(rendered).to match(/33/)
+      expect(rendered).to match(/43/)
+      expect(rendered).to match(/53/)
+      expect(rendered).to match(/4/)
+      expect(rendered).to match(/14/)
+      expect(rendered).to match(/24/)
+      expect(rendered).to match(/34/)
+      expect(rendered).to match(/44/)
+      expect(rendered).to match(/54/)
+      expect(rendered).to match(/Audiometer/)
+      expect(rendered).to match(/Hospital/)
     end
   end
 
@@ -170,18 +170,18 @@ describe "audiograms/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should match(/\+0900/)             # 検査時刻がJSTで表示されること
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:L].to_s))
-      rendered.should match(/cut off/)            # cut off値表示がある
+      expect(rendered).to match(/\+0900/)             # 検査時刻がJSTで表示されること
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:L].to_s))
+      expect(rendered).to match(/cut off/)            # cut off値表示がある
     end
   end
 
@@ -208,18 +208,18 @@ describe "audiograms/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
-      rendered.should match(/\+0900/)             # 検査時刻がJSTで表示されること
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
-      rendered.should match(Regexp.new(mean("3", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
-      rendered.should match(Regexp.new(mean("4", @audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
-      rendered.should match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
-      rendered.should match(Regexp.new(mean("6", @audiogram)[:L].to_s))
-      rendered.should_not match(/cut off/)            # cut off値表示がある
+      expect(rendered).to match(/\+0900/)             # 検査時刻がJSTで表示されること
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
+      expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:R].to_s)) # 4分法
+      expect(rendered).to match(Regexp.new(mean("4", @audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:R].to_s)) # 4分法(cut offあり)
+      expect(rendered).to match(Regexp.new(mean("4R",@audiogram)[:L].to_s))
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:R].to_s)) # 6分法
+      expect(rendered).to match(Regexp.new(mean("6", @audiogram)[:L].to_s))
+      expect(rendered).to_not match(/cut off/)            # cut off値表示がある
     end
   end
 
@@ -231,7 +231,7 @@ describe "audiograms/show" do
     it "renders attributes in <p>" do
       render
       # Run the generator again with the --webrat flag if you want to use webrat matchers
-      rendered.should match(Regexp.new(reg_id(@patient.hp_id)))
+      expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
       assert_select "table>tr>td>form input[value=?]", @audiogram.comment
                                                   # comment内容が form/input内に表示される

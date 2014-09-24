@@ -40,7 +40,7 @@ describe PatientsController do
     it "assigns all patients as @patients" do
       patient = Patient.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:patients).should eq([patient])
+      expect(assigns(:patients)).to eq([patient])
     end
   end
 
@@ -48,14 +48,14 @@ describe PatientsController do
     it "assigns the requested patient as @patient" do
       patient = Patient.create! valid_attributes
       get :show, {:id => patient.to_param}, valid_session
-      assigns(:patient).should eq(patient)
+      expect(assigns(:patient)).to eq(patient)
     end
   end
 
   describe "GET new" do
     it "assigns a new patient as @patient" do
       get :new, {}, valid_session
-      assigns(:patient).should be_a_new(Patient)
+      expect(assigns(:patient)).to be_a_new(Patient)
     end
   end
 
@@ -63,7 +63,7 @@ describe PatientsController do
     it "assigns the requested patient as @patient" do
       patient = Patient.create! valid_attributes
       get :edit, {:id => patient.to_param}, valid_session
-      assigns(:patient).should eq(patient)
+      expect(assigns(:patient)).to eq(patient)
     end
   end
 
@@ -77,13 +77,13 @@ describe PatientsController do
 
       it "assigns a newly created patient as @patient" do
         post :create, {:patient => valid_attributes}, valid_session
-        assigns(:patient).should be_a(Patient)
-        assigns(:patient).should be_persisted
+        expect(assigns(:patient)).to be_a(Patient)
+        expect(assigns(:patient)).to be_persisted
       end
 
       it "redirects to the created patient" do
         post :create, {:patient => valid_attributes}, valid_session
-        response.should redirect_to(Patient.last)
+        expect(response).to redirect_to(Patient.last)
       end
     end
 
@@ -92,14 +92,14 @@ describe PatientsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Patient).to receive(:save).and_return(false)
         post :create, {:patient => {}}, valid_session
-        assigns(:patient).should be_a_new(Patient)
+        expect(assigns(:patient)).to be_a_new(Patient)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Patient).to receive(:save).and_return(false)
         post :create, {:patient => {}}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -119,13 +119,13 @@ describe PatientsController do
       it "assigns the requested patient as @patient" do
         patient = Patient.create! valid_attributes
         put :update, {:id => patient.to_param, :patient => valid_attributes}, valid_session
-        assigns(:patient).should eq(patient)
+        expect(assigns(:patient)).to eq(patient)
       end
 
       it "redirects to the patient" do
         patient = Patient.create! valid_attributes
         put :update, {:id => patient.to_param, :patient => valid_attributes}, valid_session
-        response.should redirect_to(patient)
+        expect(response).to redirect_to(patient)
       end
     end
 
@@ -135,7 +135,7 @@ describe PatientsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Patient).to receive(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {}}, valid_session
-        assigns(:patient).should eq(patient)
+        expect(assigns(:patient)).to eq(patient)
       end
 
       it "re-renders the 'edit' template" do
@@ -143,7 +143,7 @@ describe PatientsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Patient).to receive(:save).and_return(false)
         put :update, {:id => patient.to_param, :patient => {}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -159,7 +159,7 @@ describe PatientsController do
     it "redirects to the patients list" do
       patient = Patient.create! valid_attributes
       delete :destroy, {:id => patient.to_param}, valid_session
-      response.should redirect_to(patients_url)
+      expect(response).to redirect_to(patients_url)
     end
   end
 
@@ -172,11 +172,11 @@ describe PatientsController do
       end
 
       it "正しく @patientとしてassignされること" do
-        assigns(:patient).should eq(@patient)
+        expect(assigns(:patient)).to eq(@patient)
       end
 
       it "redirects to the patient" do
-        response.should redirect_to(@patient)
+        expect(response).to redirect_to(@patient)
       end
     end
 
@@ -185,20 +185,20 @@ describe PatientsController do
       hp_id = patient.hp_id
       patient.delete
       get :by_hp_id, {:hp_id => hp_id}, valid_session
-      response.status.should  be(404)
+      expect(response.status).to be(404)
     end
 
     if id_validation_enable?
       it "(以前のsystemでは)invalidな hp_idで requestした場合、HTTP status code 400を返すこと" do
         @invalid_hp_id = 18
         get :by_hp_id, {:hp_id => @invalid_hp_id}, valid_session
-        response.status.should be(400)
+        expect(response.status).to be(400)
       end
     else
       it "(以前のsystemでは)invalidな hp_idで requestした場合も、HTTP status code 400を返さないこと" do
         @invalid_hp_id = 18
         get :by_hp_id, {:hp_id => @invalid_hp_id}, valid_session
-        response.status.should_not be(400)
+        expect(response.status).not_to be(400)
       end
     end
   end

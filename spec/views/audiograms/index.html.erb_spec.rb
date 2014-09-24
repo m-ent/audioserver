@@ -33,7 +33,7 @@ describe "audiograms/index" do
       :count => 2
     assert_select "tr>td>a>img", :count => 2
     thumb_location = "assets/#{@audiogram_stub.image_location.sub("graphs", "thumbnails")}"
-    rendered.should =~ Regexp.new("#{thumb_location}.+#{thumb_location}", Regexp::MULTILINE)
+    expect(rendered).to match (Regexp.new("#{thumb_location}.+#{thumb_location}", Regexp::MULTILINE))
     assert_select "tr>td", :text => "Comment".to_s, :count => 2
   end
 end

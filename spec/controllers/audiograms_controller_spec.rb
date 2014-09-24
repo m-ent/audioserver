@@ -46,7 +46,7 @@ describe AudiogramsController do
       audiogram = Audiogram.create! valid_attributes
       @patient.audiograms << audiogram
       get :index, {:patient_id => @patient.to_param}, valid_session
-      assigns(:audiograms).should eq([audiogram])
+      expect(assigns(:audiograms)).to eq([audiogram])
     end
   end
 
@@ -71,7 +71,7 @@ describe AudiogramsController do
 
     it "assigns the requested audiogram as @audiogram" do
       get :show, {:patient_id => @patient.to_param, :id => @audiogram.to_param}, valid_session
-      assigns(:audiogram).should eq(@audiogram)
+      expect(assigns(:audiogram)).to eq(@audiogram)
     end
 
     it "聴検の画像が保存されている場合、画像が更新されないこと" do
@@ -80,24 +80,24 @@ describe AudiogramsController do
       File::open(@image_file) do |f|
         content = f.read
       end
-      content.should == @test_str
+      expect(content).to eq @test_str
     end
 
     it "聴検の画像が保存されていない場合、画像を作成すること" do
       @audiogram.image_location = "DummyImageLocation"
       @audiogram.save
-      @audiogram.image_location.should == "DummyImageLocation"
+      expect(@audiogram.image_location).to eq "DummyImageLocation"
       get :show, {:patient_id => @patient.to_param, :id => @audiogram.to_param}, valid_session
-      File.exist?(@image_file).should be true
+      expect(File.exist?(@image_file)).to be true
       @audiogram.reload
-      @audiogram.image_location.should_not == "DummyImageLocation"
+      expect(@audiogram.image_location).not_to eq "DummyImageLocation"
     end
   end
 
   describe "GET new" do
     it "assigns a new audiogram as @audiogram" do
       get :new, {:patient_id => @patient.to_param}, valid_session
-      assigns(:audiogram).should be_a_new(Audiogram)
+      expect(assigns(:audiogram)).to be_a_new(Audiogram)
     end
   end
 
@@ -107,7 +107,7 @@ describe AudiogramsController do
         audiogram = Audiogram.create! valid_attributes
         @patient.audiograms << audiogram
         get :edit, {:patient_id => @patient.to_param, :id => audiogram.to_param}, valid_session
-        assigns(:audiogram).should_not eq(audiogram)
+        expect(assigns(:audiogram)).not_to eq(audiogram)
       end
     end
 
@@ -117,7 +117,7 @@ describe AudiogramsController do
         audiogram = Audiogram.create! valid_attributes
         @patient.audiograms << audiogram
         get :edit, {:patient_id => @patient.to_param, :id => audiogram.to_param}, valid_session
-        assigns(:audiogram).should eq(audiogram)
+        expect(assigns(:audiogram)).to eq(audiogram)
       end
     end
 
@@ -127,7 +127,7 @@ describe AudiogramsController do
         audiogram = Audiogram.create! valid_attributes
         @patient.audiograms << audiogram
         get :edit, {:patient_id => @patient.to_param, :id => audiogram.to_param}, valid_session
-        assigns(:audiogram).should_not eq(audiogram)
+        expect(assigns(:audiogram)).not_to eq(audiogram)
       end
     end
   end
@@ -142,13 +142,13 @@ describe AudiogramsController do
 
       it "assigns a newly created audiogram as @audiogram" do
         post :create, {:patient_id => @patient.to_param, :audiogram => valid_attributes}, valid_session
-        assigns(:audiogram).should be_a(Audiogram)
-        assigns(:audiogram).should be_persisted
+        expect(assigns(:audiogram)).to be_a(Audiogram)
+        expect(assigns(:audiogram)).to be_persisted
       end
 
       it "redirects to the created audiogram" do
         post :create, {:patient_id => @patient.to_param, :audiogram => valid_attributes}, valid_session
-        response.should redirect_to([@patient, Audiogram.last])
+        expect(response).to redirect_to([@patient, Audiogram.last])
       end
     end
 
@@ -157,14 +157,14 @@ describe AudiogramsController do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         post :create, {:patient_id => @patient.to_param, :audiogram => {}}, valid_session
-        assigns(:audiogram).should be_a_new(Audiogram)
+        expect(assigns(:audiogram)).to be_a_new(Audiogram)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         post :create, {:patient_id => @patient.to_param, :audiogram => {}}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -188,7 +188,7 @@ describe AudiogramsController do
         @patient.audiograms << audiogram
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => valid_attributes}, valid_session
-        assigns(:audiogram).should eq(audiogram)
+        expect(assigns(:audiogram)).to eq(audiogram)
       end
 
       it "redirects to the audiogram" do
@@ -196,7 +196,7 @@ describe AudiogramsController do
         @patient.audiograms << audiogram
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => valid_attributes}, valid_session
-        response.should redirect_to([@patient, audiogram])
+        expect(response).to redirect_to([@patient, audiogram])
       end
     end
 
@@ -208,7 +208,7 @@ describe AudiogramsController do
         allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => {}}, valid_session
-        assigns(:audiogram).should eq(audiogram)
+        expect(assigns(:audiogram)).to eq(audiogram)
       end
 
       it "re-renders the 'edit' template" do
@@ -218,7 +218,7 @@ describe AudiogramsController do
         allow_any_instance_of(Audiogram).to receive(:save).and_return(false)
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
 	              :audiogram => {}}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -240,7 +240,7 @@ describe AudiogramsController do
       it "does not redirect to the audiograms list" do
         delete :destroy, {:patient_id => @patient.to_param, :id => @audiogram.to_param},\
           valid_session
-        response.should_not redirect_to(patient_audiograms_url)
+        expect(response).not_to redirect_to(patient_audiograms_url)
       end
     end
 
@@ -259,7 +259,7 @@ describe AudiogramsController do
       it "does not redirect to the audiograms list" do
         delete :destroy, {:patient_id => @patient.to_param, :id => @audiogram.to_param},\
           valid_session
-        response.should_not redirect_to(patient_audiograms_url)
+        expect(response).not_to redirect_to(patient_audiograms_url)
       end
     end
 
@@ -280,7 +280,7 @@ describe AudiogramsController do
           valid_session
 #        response.should redirect_to(@audiograms_url)
 #        response.should redirect_to([@patient, @audiograms_url])
-        response.should redirect_to(patient_audiograms_url)
+        expect(response).to redirect_to(patient_audiograms_url)
       end
     end
   end
@@ -307,7 +307,7 @@ describe AudiogramsController do
       it "HTTP status code 400を返すこと" do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
 	                      :audiometer => @audiometer, :comment => @comment, :data => @raw_audiosample}
-        response.status.should  be(400)
+        expect(response.status).to be(400)
       end
     end
 
@@ -324,14 +324,14 @@ describe AudiogramsController do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
                               :audiometer => @audiometer, :datatype => @datatype, \
                               :comment => @comment, :data => @raw_audiosample}
-        assigns(:audiogram).mask_ac_rt_125.should_not be_nil
+        expect(assigns(:audiogram).mask_ac_rt_125).not_to be_nil
       end
 
       it "正しいパラメータの場合、HTTP status code 204を返すこと" do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
                               :audiometer => @audiometer, :datatype => @datatype, \
                               :comment => @comment, :data => @raw_audiosample}
-        response.status.should  be(204)
+        expect(response.status).to be(204)
       end
 
       it "正しいパラメータの場合、所定の位置にグラフとサムネイルが作られること" do
@@ -340,8 +340,8 @@ describe AudiogramsController do
                               :comment => @comment, :data => @raw_audiosample}
         img_loc = "app/assets/images/#{assigns(:audiogram).image_location}"
         thumb_loc = img_loc.sub("graphs", "thumbnails")
-        File::exists?(img_loc).should be true
-        File::exists?(thumb_loc).should be true
+        expect(File::exists?(img_loc)).to be true
+        expect(File::exists?(thumb_loc)).to be true
         # assigns(:audiogram)を有効にするには、controller側でインスタンス変数@audiogramが
         # 作成したAudiogramを示すことが必要
       end
@@ -358,7 +358,7 @@ describe AudiogramsController do
           post :direct_create, {:hp_id => @invalid_hp_id, :examdate => @examdate, \
                                 :audiometer => @audiometer, :datatype => @datatype, \
                                 :comment => @comment, :data => @raw_audiosample}
-          response.status.should  be(204)
+          expect(response.status).to be(204)
         end
       end
 
@@ -366,21 +366,21 @@ describe AudiogramsController do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
                               :datatype => @datatype, \
                               :comment => @comment, :data => @raw_audiosample}
-        response.status.should  be(400)
+        expect(response.status).to be(400)
       end
 
       it "dataがない場合、HTTP status code 400を返すこと" do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
                               :audiometer => @audiometer, :datatype => @datatype, \
                               :comment => @comment}
-        response.status.should  be(400)
+        expect(response.status).to be(400)
       end
 
       it "data形式が不正の場合、HTTP status code 400を返すこと" do
         post :direct_create, {:hp_id => @valid_hp_id, :examdate => @examdate, \
                               :audiometer => @audiometer, :datatype => @datatype, \
                               :comment => @comment, :data => "no valid data"}
-        response.status.should  be(400)
+        expect(response.status).to be(400)
       end
 
       it "hp_idが存在しないものの場合、新たにPatientのインスタンスを作る(Patientのアイテム数が1増える)こと" do
@@ -420,24 +420,24 @@ describe AudiogramsController do
 
         it "1つのcommentがある場合、それに応じたコメントが記録されること" do
           direct_create_with_comment("RETRY_")
-          @patient.audiograms.last.comment.should =~ /再検査\(RETRY\)/
+          expect(@patient.audiograms.last.comment).to match(/再検査\(RETRY\)/)
           direct_create_with_comment("MASK_")
-          @patient.audiograms.last.comment.should match(/マスキング変更\(MASK\)/)
+          expect(@patient.audiograms.last.comment).to match(/マスキング変更\(MASK\)/)
           direct_create_with_comment("PATCH_")
-          @patient.audiograms.last.comment.should match(/パッチテスト\(PATCH\)/)
+          expect(@patient.audiograms.last.comment).to match(/パッチテスト\(PATCH\)/)
           direct_create_with_comment("MED_")
-          @patient.audiograms.last.comment.should match(/薬剤投与後\(MED\)/)
+          expect(@patient.audiograms.last.comment).to match(/薬剤投与後\(MED\)/)
           direct_create_with_comment("OTHER:幾つかのコメント_")
-          @patient.audiograms.last.comment.should match(/^・幾つかのコメント/)
+          expect(@patient.audiograms.last.comment).to match(/^・幾つかのコメント/)
         end
 
         it "2つのcommentがある場合、それに応じたコメントが記録されること" do
           direct_create_with_comment("RETRY_MASK_")
-          @patient.audiograms.last.comment.should =~ /再検査\(RETRY\)/
-          @patient.audiograms.last.comment.should match(/マスキング変更\(MASK\)/)
+          expect(@patient.audiograms.last.comment).to match(/再検査\(RETRY\)/)
+          expect(@patient.audiograms.last.comment).to match(/マスキング変更\(MASK\)/)
           direct_create_with_comment("MED_OTHER:幾つかのコメント_")
-          @patient.audiograms.last.comment.should match(/薬剤投与後\(MED\)/)
-          @patient.audiograms.last.comment.should match(/^・幾つかのコメント/)
+          expect(@patient.audiograms.last.comment).to match(/薬剤投与後\(MED\)/)
+          expect(@patient.audiograms.last.comment).to match(/^・幾つかのコメント/)
         end
       end
 
@@ -460,17 +460,17 @@ describe AudiogramsController do
     end
 
     it "commentを更新できること" do
-      @patient.audiograms.length.should == 1
-      @audiogram.comment.should == @old_comment
+      expect(@patient.audiograms.length).to eq 1
+      expect(@audiogram.comment).to eq @old_comment
       put :edit_comment, {:patient_id => @patient.to_param, :id => @audiogram.to_param, \
 	                  :comment => @new_comment}, valid_session
-      @audiogram.reload.comment.should == @new_comment
+      expect(@audiogram.reload.comment).to eq @new_comment
     end
 
     it "redirects to show the audiogram" do
       put :edit_comment, {:patient_id => @patient.to_param, :id => @audiogram.to_param, \
 	                  :comment => @new_comment}, valid_session
-      response.should redirect_to(patient_audiogram_url)
+      expect(response).to redirect_to(patient_audiogram_url)
     end
   end
 end
