@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require_relative '../lib/id_validation'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,5 +28,8 @@ module Audioserver
 
     # I18n locale validation
     config.i18n.enforce_available_locales = true
+
+    # to auto load lib/ directory
+    #config.autoload_paths += %W(#{config.root}/lib)
   end
 end
