@@ -9,7 +9,7 @@ describe "audiograms/show" do
       :examiner => nil,
       :examdate => Time.now,
       :comment => "Comment",
-      :image_location => "Image Location",
+      :image_location => "Image_Location",
 
       :ac_rt_125 => 0, :ac_rt_250 => 10, :ac_rt_500 => 20, :ac_rt_1k => 30,
       :ac_rt_2k => 40, :ac_rt_4k => 50, :ac_rt_8k => 60,
@@ -68,7 +68,7 @@ describe "audiograms/show" do
       expect(rendered).to match(Regexp.new(reg_id(@patient.hp_id)))
                                                   # hp_idがxxx-xxxx-xx-xで表示されること
       expect(rendered).to match(/\+0900/)             # 検査時刻がJSTで表示されること
-      expect(rendered).to match(Regexp.new("assets/#{@audiogram.image_location}"))
+      expect(rendered).to match(Regexp.new(image_path(@audiogram.image_location)))
       expect(rendered).to match(/Comment/)
       expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:R].to_s)) # 3分法が表示される
       expect(rendered).to match(Regexp.new(mean("3", @audiogram)[:L].to_s))
