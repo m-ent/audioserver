@@ -112,8 +112,8 @@ describe PatientsController do
         # specifies that the Patient created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Patient).to receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => patient.to_param, :patient => {'these' => 'params'}}, valid_session
+        expect_any_instance_of(Patient).to receive(:update).with({'hp_id' => 'params'})
+        put :update, {:id => patient.to_param, :patient => {'hp_id' => 'params'}}, valid_session
       end
 
       it "assigns the requested patient as @patient" do

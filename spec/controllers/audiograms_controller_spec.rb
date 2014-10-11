@@ -178,9 +178,9 @@ describe AudiogramsController do
         # specifies that the Audiogram created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Audiogram).to receive(:update_attributes).with({'these' => 'params'})
+        expect_any_instance_of(Audiogram).to receive(:update).with({'audiometer' => 'params'})
         put :update, {:patient_id => @patient.to_param, :id => audiogram.to_param, \
-	              :audiogram => {'these' => 'params'}}, valid_session
+	              :audiogram => {'audiometer' => 'params'}}, valid_session
       end
 
       it "assigns the requested audiogram as @audiogram" do

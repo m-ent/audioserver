@@ -44,7 +44,7 @@ class PatientsController < ApplicationController
   # POST /patients
   # POST /patients.json
   def create
-    @patient = Patient.new(params[:patient])
+    @patient = Patient.new(patient_params)
     @patient.hp_id = valid_id?(@patient.hp_id)
 
     respond_to do |format|
@@ -64,7 +64,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
 
     respond_to do |format|
-      if @patient.update_attributes(params[:patient])
+      if @patient.update(patient_params)
         format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
         format.json { head :no_content }
       else
@@ -112,5 +112,11 @@ class PatientsController < ApplicationController
     end
 
   end
+
+  private
+  def patient_params
+    params.fetch(:patient, {}).permit(:hp_id)
+  end
+
 
 end

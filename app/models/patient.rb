@@ -1,7 +1,7 @@
 class Patient < ActiveRecord::Base
   has_many :audiograms
   has_many :examiners, :through => :audiograms
-  attr_accessible :hp_id
+#  attr_accessible :hp_id
 
   validate :hp_id_is_valid
 end
