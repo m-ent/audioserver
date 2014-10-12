@@ -1,4 +1,4 @@
-Audioserver::Application.routes.draw do
+Rails.application.routes.draw do
   resources :examiners
 
   resources :patients do
