@@ -25,7 +25,7 @@
     <!-- td><%#= audiogram.manual_input %></td -->
     <td><%= link_to 'Show', patient_audiogram_path(@patient, audiogram) %><br>
         <%= link_to 'Edit', edit_patient_audiogram_path(@patient, audiogram) %><br>
-        <%= link_to 'Destroy', [audiogram.patient, audiogram], :confirm => 'Are you sure?', :method => :delete %></td>
+        <%= link_to 'Destroy', [audiogram.patient, audiogram], data: {confirm: 'Are you sure?'}, method: :delete %></td>
     </tr>
 <% end %>
 </table>

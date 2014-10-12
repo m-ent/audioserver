@@ -16,7 +16,7 @@ class AudiogramsController < ApplicationController
   # GET /audiograms.json
   def index
     @patient = Patient.find(params[:patient_id])
-    @audiograms = @patient.audiograms.order('examdate DESC').all
+    @audiograms = @patient.audiograms.order('examdate DESC').to_a
 
     respond_to do |format|
       format.html # index.html.erb

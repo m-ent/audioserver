@@ -13,7 +13,7 @@
     <td><%= examiner.worker_id %></td>
     <td><%= link_to 'Show', examiner %></td>
     <td><%= link_to 'Edit', edit_examiner_path(examiner) %></td>
-    <td><%= link_to 'Destroy', examiner, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', examiner, data: {confirm: 'Are you sure?'}, method: :delete %></td>
   </tr>
 <% end %>
 </table>
