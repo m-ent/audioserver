@@ -45,7 +45,7 @@ describe Audio do
     it '新しくbackground_audiogram.pngを作ること' do
       File::delete(@bg_file) if File::exists?(@bg_file)
       a = Audio.new(Audiodata.new("raw", rawsample_complete))
-      File::exists?(@bg_file).should be_true
+      File::exists?(@bg_file).should be true
     end
   end
 
@@ -56,7 +56,7 @@ describe Audio do
     end
 
     it 'ファイルに出力されること' do
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
 
     it '出力は background_audiogram.pngと同じサイズであること' do
@@ -71,7 +71,7 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
 
     it 'mean4の出力が正しいこと' do
@@ -96,7 +96,7 @@ describe Audio do
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
     # もとのデータ文字列(rawsample_complete)がput_rawdataの出力結果を含むこと
-      rawsample_complete.index(@a.put_rawdata).should be_true
+      expect(rawsample_complete.index(@a.put_rawdata)).not_to be nil
     end
 
     it '出力は background_audiogram.pngと異なったサイズであること' do
@@ -111,7 +111,7 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
 
     it 'mean4の出力が-100.0になること' do
@@ -126,7 +126,7 @@ describe Audio do
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
     # もとのデータ文字列(rawsample_complete)がput_rawdataの出力結果を含むこと
-      rawsample_incomplete.index(@a.put_rawdata).should be_true
+      expect(rawsample_incomplete.index(@a.put_rawdata)).not_to be nil
     end
   end
 
@@ -139,7 +139,7 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
 
     it 'mean4の出力が正しいこと' do
@@ -162,7 +162,7 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
   end
 
@@ -203,7 +203,7 @@ describe Array, "when empty" do
   end
 
   it "should be empty" do
-    @empty_array.should be_empty
+    @empty_array.should be empty
   end
 
   it "should size 0" do
@@ -241,7 +241,7 @@ describe Stack do
   describe '#pop' do
     context 'スタックが空の場合' do
       it '返り値はnilであること' do
-        @stack.pop.should be_nil
+        @stack.pop.should be nil
       end
     end
 
