@@ -45,7 +45,7 @@ describe Audio do
     it '新しくbackground_audiogram.pngを作ること' do
       File::delete(@bg_file) if File::exists?(@bg_file)
       a = Audio.new(Audiodata.new("raw", rawsample_complete))
-      File::exists?(@bg_file).should be true
+      expect(File::exists?(@bg_file)).to be true
     end
   end
 
@@ -56,11 +56,11 @@ describe Audio do
     end
 
     it 'ファイルに出力されること' do
-      File::exists?(@output_file).should be true
+      expect(File::exists?(@output_file)).to be true
     end
 
     it '出力は background_audiogram.pngと同じサイズであること' do
-      File::stat(@output_file).size.should == File::stat(@bg_file).size
+      expect(File::stat(@output_file).size).to eq File::stat(@bg_file).size
     end
   end
 
@@ -71,27 +71,27 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be true
+      expect(File::exists?(@output_file)).to be true
     end
 
     it 'mean4の出力が正しいこと' do
-      @a.mean4[:rt].should == 30.0
-      @a.mean4[:lt].should == 45.0
+      expect(@a.mean4[:rt]).to eq 30.0
+      expect(@a.mean4[:lt]).to eq 45.0
     end
 
     it 'reg_mean4(正規化したもの)の出力が正しいこと' do
-      @a.reg_mean4[:rt].should == 30.0
-      @a.reg_mean4[:lt].should == 45.0
+      expect(@a.reg_mean4[:rt]).to eq 30.0
+      expect(@a.reg_mean4[:lt]).to eq 45.0
     end
 
     it 'mean3の出力が正しいこと' do
-      @a.mean3[:rt].should == 30.0
-      @a.mean3[:lt].should == 45.0
+      expect(@a.mean3[:rt]).to eq 30.0
+      expect(@a.mean3[:lt]).to eq 45.0
     end
 
     it 'mean6の出力が正しいこと' do
-      @a.mean6[:rt].should == 35.0
-      @a.mean6[:lt].should == 47.5
+      expect(@a.mean6[:rt]).to eq 35.0
+      expect(@a.mean6[:lt]).to eq 47.5
     end
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
@@ -100,7 +100,7 @@ describe Audio do
     end
 
     it '出力は background_audiogram.pngと異なったサイズであること' do
-      File::stat(@output_file).size.should_not == File::stat(@bg_file).size
+      expect(File::stat(@output_file).size).not_to eq File::stat(@bg_file).size
     end
   end
 
@@ -111,17 +111,17 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be true
+      expect(File::exists?(@output_file)).to be true
     end
 
     it 'mean4の出力が-100.0になること' do
-      @a.mean4[:rt].should == -100.0
-      @a.mean4[:lt].should == -100.0
+      expect(@a.mean4[:rt]).to eq -100.0
+      expect(@a.mean4[:lt]).to eq -100.0
     end
 
     it 'mean6の出力が-100.0になること' do
-      @a.mean6[:rt].should == -100.0
-      @a.mean6[:lt].should == -100.0
+      expect(@a.mean6[:rt]).to eq -100.0
+      expect(@a.mean6[:lt]).to eq -100.0
     end
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
@@ -139,17 +139,17 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be true
+      expect(File::exists?(@output_file)).to be true
     end
 
     it 'mean4の出力が正しいこと' do
-      @a.mean4[:rt].should == 30.0
-      @a.mean4[:lt].should == 48.25
+      expect(@a.mean4[:rt]).to eq 30.0
+      expect(@a.mean4[:lt]).to eq 48.25
     end
 
     it 'reg_mean4(正規化したもの)の出力が正しいこと' do
-      @a.reg_mean4[:rt].should == 30.0
-      @a.reg_mean4[:lt].should == 47.0
+      expect(@a.reg_mean4[:rt]).to eq 30.0
+      expect(@a.reg_mean4[:lt]).to eq 47.0
     end
   end
 
@@ -162,15 +162,15 @@ describe Audio do
     end
 
     it 'ファイル出力されること' do
-      File::exists?(@output_file).should be true
+      expect(File::exists?(@output_file)).to be true
     end
   end
 
   context 'Audioを負の値(-5)が含まれるraw dataで作成した場合' do
     it 'mean4の出力が正しいこと' do
       a = Audio.new(Audiodata.new("raw", rawsample_minusdata))
-      a.mean4[:rt].should == ((10.0 -  5.0 *2 +  5.0) /4)
-      a.mean4[:lt].should == ((20.0 + 10.0 *2 + 10.0) /4)
+      expect(a.mean4[:rt]).to eq ((10.0 -  5.0 *2 +  5.0) /4)
+      expect(a.mean4[:lt]).to eq ((20.0 + 10.0 *2 + 10.0) /4)
       #   125 250 500  1k  2k  4k  8k
       #RA  25  20  10  -5   5  10   0
       #LA  25  20  20  10  10  10   5
