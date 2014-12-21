@@ -63,7 +63,7 @@ describe ImpedanceExam do
     it 'tympanogramが生成されること' do
       File::delete(@output_t_file) if File::exists?(@output_t_file)
       @impedanceexam.output
-      File::exists?(@output_t_file).should be_true
+      File::exists?(@output_t_file).should be true
     end
 
     it '生成されたtympanogramが白紙ではない = 背景と異なっていること' do
@@ -77,7 +77,7 @@ describe ImpedanceExam do
     it 'reflex-gramが生成されること' do
       File::delete(@output_r_file) if File::exists?(@output_r_file)
       @impedanceexam.output
-      File::exists?(@output_r_file).should be_true
+      File::exists?(@output_r_file).should be true
     end
 
     it '生成されたreflex-gramが白紙ではない = 背景と異なっていること' do
@@ -143,7 +143,7 @@ describe AudioExam do
     it 'Audiogramが生成されること' do
       File::delete(@output_file) if File::exists?(@output_file)
       @audioexam.output
-      File::exists?(@output_file).should be_true
+      File::exists?(@output_file).should be true
     end
 
     it '生成されたAudiogramが白紙ではない=背景と異なっていること' do

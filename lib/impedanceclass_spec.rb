@@ -45,7 +45,7 @@ describe Impedance do
       it '新しく背景画像を作ること' do
         File::delete(@tympano_bg_file) if File::exists?(@tympano_bg_file)
         i = Impedance.new(ImpedanceData.new(@tympano_data))
-        File::exists?(@tympano_bg_file).should be_true
+        File::exists?(@tympano_bg_file).should be true
       end
     end
 
@@ -56,7 +56,7 @@ describe Impedance do
       end
 
       it 'ファイル出力されること' do
-        File::exists?(@tympano_output_file).should be_true
+        File::exists?(@tympano_output_file).should be true
       end
 
       it 'pvt (physical volume test) の出力が正しいこと' do
@@ -106,7 +106,7 @@ describe Impedance do
       end
 
       it 'ファイル出力されること' do
-        File::exists?(@tympano_output_file).should be_true
+        File::exists?(@tympano_output_file).should be true
       end
 
       it 'sc (static compliance) の出力が正しいこと' do
@@ -143,7 +143,7 @@ describe Impedance do
       it '新しく背景画像を作ること' do
         File::delete(@reflex_bg_file) if File::exists?(@reflex_bg_file)
         i = Impedance.new(ImpedanceData.new(@reflex_data))
-        File::exists?(@reflex_bg_file).should be_true
+        File::exists?(@reflex_bg_file).should be true
       end
     end
 
@@ -154,7 +154,7 @@ describe Impedance do
       end
 
       it 'ファイル出力されること' do
-        File::exists?(@reflex_output_file).should be_true
+        File::exists?(@reflex_output_file).should be true
       end
 
       it 'reflex検査での pvt (physical volume test) の出力が正しいこと' do
@@ -199,7 +199,7 @@ describe Impedance do
       end
 
       it 'ファイル出力されること' do
-        File::exists?(@reflex_output_file).should be_true
+        File::exists?(@reflex_output_file).should be true
       end
 
       it 'reflex検査での pvt (physical volume test) の出力が正しいこと' do

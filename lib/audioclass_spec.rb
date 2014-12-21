@@ -96,7 +96,7 @@ describe Audio do
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
     # もとのデータ文字列(rawsample_complete)がput_rawdataの出力結果を含むこと
-      expect(rawsample_complete.index(@a.put_rawdata)).not_to be nil
+      expect(rawsample_complete.index(@a.put_rawdata)).to be_truthy
     end
 
     it '出力は background_audiogram.pngと異なったサイズであること' do
@@ -126,7 +126,7 @@ describe Audio do
 
     it 'put_rawdataでもともとのデータ文字列と同じdataが出力されること' do
     # もとのデータ文字列(rawsample_complete)がput_rawdataの出力結果を含むこと
-      expect(rawsample_incomplete.index(@a.put_rawdata)).not_to be nil
+      expect(rawsample_incomplete.index(@a.put_rawdata)).to be_truthy
     end
   end
 
