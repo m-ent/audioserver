@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :tympanograms
+
   resources :examiners
 
   resources :patients do

@@ -9,11 +9,11 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614053152) do
+ActiveRecord::Schema.define(version: 20150203155058) do
 
-  create_table "audiograms", :force => true do |t|
+  create_table "audiograms", force: true do |t|
     t.integer  "patient_id"
     t.integer  "examiner_id"
     t.datetime "examdate"
@@ -126,23 +126,50 @@ ActiveRecord::Schema.define(:version => 20120614053152) do
     t.boolean  "manual_input"
     t.string   "audiometer"
     t.string   "hospital"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  add_index "audiograms", ["examiner_id"], :name => "index_audiograms_on_examiner_id"
-  add_index "audiograms", ["patient_id"], :name => "index_audiograms_on_patient_id"
+  add_index "audiograms", ["examiner_id"], name: "index_audiograms_on_examiner_id"
+  add_index "audiograms", ["patient_id"], name: "index_audiograms_on_patient_id"
 
-  create_table "examiners", :force => true do |t|
+  create_table "examiners", force: true do |t|
     t.string   "worker_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "patients", :force => true do |t|
+  create_table "patients", force: true do |t|
     t.string   "hp_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  create_table "tympanograms", force: true do |t|
+    t.integer  "patient_id"
+    t.integer  "examiner_id"
+    t.datetime "examdate"
+    t.string   "comment"
+    t.string   "image_location"
+    t.string   "impedancemeter"
+    t.string   "hospital"
+    t.float    "rt_pvt"
+    t.float    "rt_sc"
+    t.integer  "rt_peak"
+    t.float    "rt_interval"
+    t.text     "rt_data"
+    t.integer  "rt_data_length"
+    t.float    "lt_pvt"
+    t.float    "lt_sc"
+    t.integer  "lt_peak"
+    t.float    "lt_interval"
+    t.text     "lt_data"
+    t.integer  "lt_data_length"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tympanograms", ["examiner_id"], name: "index_tympanograms_on_examiner_id"
+  add_index "tympanograms", ["patient_id"], name: "index_tympanograms_on_patient_id"
 
 end

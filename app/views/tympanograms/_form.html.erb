@@ -1,0 +1,93 @@
+<%= form_for(@tympanogram) do |f| %>
+  <% if @tympanogram.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tympanogram.errors.count, "error") %> prohibited this tympanogram from being saved:</h2>
+
+      <ul>
+      <% @tympanogram.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :patient_id %><br>
+    <%= f.text_field :patient_id %>
+  </div>
+  <div class="field">
+    <%= f.label :examiner_id %><br>
+    <%= f.text_field :examiner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :examdate %><br>
+    <%= f.datetime_select :examdate %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :image_location %><br>
+    <%= f.text_field :image_location %>
+  </div>
+  <div class="field">
+    <%= f.label :impedancemeter %><br>
+    <%= f.text_field :impedancemeter %>
+  </div>
+  <div class="field">
+    <%= f.label :hospital %><br>
+    <%= f.text_field :hospital %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_pvt %><br>
+    <%= f.text_field :rt_pvt %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_sc %><br>
+    <%= f.text_field :rt_sc %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_peak %><br>
+    <%= f.number_field :rt_peak %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_interval %><br>
+    <%= f.text_field :rt_interval %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_data %><br>
+    <%= f.text_area :rt_data %>
+  </div>
+  <div class="field">
+    <%= f.label :rt_data_length %><br>
+    <%= f.number_field :rt_data_length %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_pvt %><br>
+    <%= f.text_field :lt_pvt %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_sc %><br>
+    <%= f.text_field :lt_sc %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_peak %><br>
+    <%= f.number_field :lt_peak %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_interval %><br>
+    <%= f.text_field :lt_interval %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_data %><br>
+    <%= f.text_area :lt_data %>
+  </div>
+  <div class="field">
+    <%= f.label :lt_data_length %><br>
+    <%= f.number_field :lt_data_length %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

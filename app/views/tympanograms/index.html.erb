@@ -1,0 +1,61 @@
+<h1>Listing tympanograms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient</th>
+      <th>Examiner</th>
+      <th>Examdate</th>
+      <th>Comment</th>
+      <th>Image location</th>
+      <th>Impedancemeter</th>
+      <th>Hospital</th>
+      <th>Rt pvt</th>
+      <th>Rt sc</th>
+      <th>Rt peak</th>
+      <th>Rt interval</th>
+      <th>Rt data</th>
+      <th>Rt data length</th>
+      <th>Lt pvt</th>
+      <th>Lt sc</th>
+      <th>Lt peak</th>
+      <th>Lt interval</th>
+      <th>Lt data</th>
+      <th>Lt data length</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tympanograms.each do |tympanogram| %>
+      <tr>
+        <td><%= tympanogram.patient %></td>
+        <td><%= tympanogram.examiner %></td>
+        <td><%= tympanogram.examdate %></td>
+        <td><%= tympanogram.comment %></td>
+        <td><%= tympanogram.image_location %></td>
+        <td><%= tympanogram.impedancemeter %></td>
+        <td><%= tympanogram.hospital %></td>
+        <td><%= tympanogram.rt_pvt %></td>
+        <td><%= tympanogram.rt_sc %></td>
+        <td><%= tympanogram.rt_peak %></td>
+        <td><%= tympanogram.rt_interval %></td>
+        <td><%= tympanogram.rt_data %></td>
+        <td><%= tympanogram.rt_data_length %></td>
+        <td><%= tympanogram.lt_pvt %></td>
+        <td><%= tympanogram.lt_sc %></td>
+        <td><%= tympanogram.lt_peak %></td>
+        <td><%= tympanogram.lt_interval %></td>
+        <td><%= tympanogram.lt_data %></td>
+        <td><%= tympanogram.lt_data_length %></td>
+        <td><%= link_to 'Show', tympanogram %></td>
+        <td><%= link_to 'Edit', edit_tympanogram_path(tympanogram) %></td>
+        <td><%= link_to 'Destroy', tympanogram, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tympanogram', new_tympanogram_path %>
