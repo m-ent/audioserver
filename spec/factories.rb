@@ -117,4 +117,25 @@ FactoryGirl.define do
     mask_bc_lt_8k_type 
 =end
   end
+
+  factory :tympanogram do
+    examdate Time.now
+    comment nil
+    impedancemeter "RS-22"
+    hospital "NEMC"
+    image_location nil
+
+    rt_pvt 0.0
+    rt_sc 0.1
+    rt_peak 1
+    rt_interval 0.2
+    rt_data ""
+    rt_data_length 10
+    lt_pvt 0.3
+    lt_sc 0.4
+    lt_peak 2
+    lt_interval 0.5
+    lt_data " "
+    lt_data_length 11
+  end
 end
